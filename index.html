@@ -35,88 +35,65 @@
 					<section id="intro" class="container">
 						<p class="style1">So in case you were wondering what this is all about ...</p>
 						<p class="style2">
-							Machine Learning & Computer Vision <br class="mobile-hide" />
+							Machine Learning &amp; Computer Vision <br class="mobile-hide" />
 							in Manufacturing<br class="mobile-hide" />
 
-						<p class="style3">Computer vision and MES (Manufacturing Execution Systems have been around for a while. They are very costly to 
-            install and maintain, and complicated to configure. Most factories in China lack the ability to implement these systems.
-            <strong>responsive</strong>, built on <strong>HTML5</strong> and <strong>CSS3</strong>, and released for
-						free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0 license</a>, so use it for any of
-						your personal or commercial projects &ndash; just be sure to credit us!</p>
-
-						<p class="style3">This project aims to solve this problem  <strong>responsive</strong>, built on <strong>HTML5</strong> and <strong>CSS3</strong>, and released for
-						free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0 license</a>, so use it for any of
-						your personal or commercial projects &ndash; just be sure to credit us!</p>
-						<ul class="actions">
-							<li><a href="#" class="button style3 big">Proceed</a></li>
-						</ul>
+              <p class="style3">Computer vision and MES (Manufacturing Execution Systems have been around for some time. <strong>They are very costly to 
+                install and maintain, and complicated to configure.</strong> For this reason, most factories in China still use<strong> spreadsheets.</strong>
+            </p>
+            <br>
+            <p class="style3">In this project I want to create <strong>cost effective and very easy to deploy and maintain</strong> software to track production line metrics
+            for the vast amount of supiers and sub suppliers needed to successfully build a product. The aim is not be 100% accurate, however to give people 
+            visibility into their manufacturing in China. <strong>Think Fitbit for manufacturing.</strong>
+            </p>
+            <br> 
+            <p class="style3">This project will demonstrate how we use data from images to build a model and predict products on a production line.</p>
+            <br>
+						<p class="style1">The goal is to have the ability to quickly train a new product and predict it with at least a 90% accuracy.</p>
+            <br> INSERT VIDEO HERE!
+            						<!--<ul class="actions">-->
+							<!--<li><a href="#" class="button style3 big">Proceed</a></li>-->
+						<!--</ul>-->
 					</section>
 				</div>
 
 			<!-- Main -->
 				<div class="wrapper style2">
-					<div class="title">The Details</div>
+					<div class="title">The Data</div>
 					<div id="main" class="container">
 
-						<!-- Image -->
-							<a href="#" class="image featured">
-								<img src="images/pic01.jpg" alt="" />
-							</a>
 
 						<!-- Features -->
 							<section id="features">
-								<header class="style1">
-									<h2>Dolor consequat feugiat amet veroeros</h2>
-									<p>Feugiat dolor nullam orci pretium phasellus justo</p>
-								</header>
-								<div class="feature-list">
-									<div class="row">
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-comment">Mattis velit diam vulputate</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-refresh">Lorem ipsum dolor sit veroeros</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-									<div class="row">
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-picture-o">Pretium phasellus justo lorem</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-cog">Tempus sed pretium orci</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-									<div class="row">
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-wrench">Aliquam consequat et feugiat</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-check">Dolore laoreet aliquam mattis</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-								</div>
-								<ul class="actions actions-centered">
-									<li><a href="#" class="button style1 big">Get Started</a></li>
-									<li><a href="#" class="button style2 big">More Info</a></li>
-								</ul>
+                <header class="style1">
+                  <h2>Data consists of images taken overhead from a Logitech C525 webcam</h2>
+                </header>
+
+             <!--Image -->
+              <a href="#" class="image featured">
+                <img src="images/collage_prod2.jpg" alt="" />
+              </a>
+              
+                <header style="margin-bottom:1em;padding-bottom:0.5em;" class="style1">
+                  <p style="margin:0em; margin-bottom:2em; line-height:0em;">Important considerations when working with images</p>
+                  <img src="images/image_array.png" alt="" />
+                </header>
+                <h3>Computers dont see images like humans do</h3>
+                  <p>
+                  Computers see images as a number representing for each pixel. When your add color RGB(Red Green Blue) 
+                  it will have a one value for each color. So if an image was 400x400 the computer would see 160,000 
+                  number values. If the image was color, it would see (400x400)x3 = 480,000. 
+                  </p>
+                <h3>Size</h3>
+                  <p>Is important when deciding what level of detail you want to extract, and is usually one of the 
+                   biggest contributing factors on performance.</p>
+                <h3>Color</h3>
+                  <p>Color can be used to help predict what is an image, but if you are not using color as a feature 
+                  (see next section), then you are adding a huge computation overhead for no reason.</p>
+                <h3>Angle, Rotation, Scale</h3>
+                  Because computers do not interpret images the same way humans do, they do not automatically 
+                  understand and diffrentiate changes in things like angle scale and rotation.
+
 							</section>
 
 					</div>
@@ -124,40 +101,9 @@
 
 			<!-- Highlights -->
 				<div class="wrapper style3">
-					<div class="title">The Endorsements</div>
+					<div class="title">The Features</div>
 					<div id="highlights" class="container">
-						<div class="row 150%">
-							<div class="4u 12u(mobile)">
-								<section class="highlight">
-									<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-									<h3><a href="#">Aliquam diam consequat</a></h3>
-									<p>Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem.</p>
-									<ul class="actions">
-										<li><a href="#" class="button style1">Learn More</a></li>
-									</ul>
-								</section>
-							</div>
-							<div class="4u 12u(mobile)">
-								<section class="highlight">
-									<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-									<h3><a href="#">Nisl adipiscing sed lorem</a></h3>
-									<p>Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem.</p>
-									<ul class="actions">
-										<li><a href="#" class="button style1">Learn More</a></li>
-									</ul>
-								</section>
-							</div>
-							<div class="4u 12u(mobile)">
-								<section class="highlight">
-									<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-									<h3><a href="#">Mattis tempus lorem</a></h3>
-									<p>Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem.</p>
-									<ul class="actions">
-										<li><a href="#" class="button style1">Learn More</a></li>
-									</ul>
-								</section>
-							</div>
-						</div>
+
 					</div>
 				</div>
 
