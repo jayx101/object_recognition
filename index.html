@@ -24,7 +24,6 @@
 							<div id="logo">
 								<h1><a href="index.html">Object Recognition</a></h1>
                 <p>A Data Science project <br>By Jacques Oelofse</p>
-								
 							</div>
 					</div>
 				</div>
@@ -37,11 +36,9 @@
 						<p class="style2">
 							Machine Learning &amp; Computer Vision <br class="mobile-hide" />
 							in Manufacturing<br class="mobile-hide" />
-
               <p class="style3">Computer vision and MES (Manufacturing Execution Systems have been around for some time. <strong>They are very costly to 
-                install and maintain, and complicated to configure.</strong> For this reason, most factories in China still use<strong> spreadsheets.</strong>
-            </p>
-            <br>
+                install and maintain, and complicated to configure.</strong> For this reason, most factories in China still use<strong> spreadsheets.</strong></p>
+              <br>
             <p class="style3">In this project I want to create <strong>cost effective and very easy to deploy and maintain</strong> software to track production line metrics
             for the vast amount of supiers and sub suppliers needed to successfully build a product. The aim is not be 100% accurate but rather to give people complete  
             visibility into their manufacturing in China. <strong>Think Fitbit for manufacturing.</strong>
@@ -76,20 +73,32 @@
               
                 <header style="margin-bottom:1em;padding-bottom:0.5em;" class="style1">
                   <p style="margin:0em; margin-bottom:2em; line-height:0em;">Important considerations when working with images</p>
-                  <img src="images/image_array.png" alt="" />
                 </header>
                 <h3>Computers dont see images like humans do</h3>
-                  <p>
-                  Computers see images as a number representing for each pixel. When your add color RGB(Red Green Blue) 
-                  it will have a one value for each color. So if an image was 400x400 the computer would see 160,000 
-                  number values. If the image was color, it would see (400x400)x3 = 480,000. 
-                  </p>
-                <h3>Size</h3>
-                  <p>Is important when deciding what level of detail you want to extract, and is usually one of the 
-                   biggest contributing factors on performance.</p>
+                <p>Computers see images as number representations for each pixel (See fig.l below) If an image is 400x400 pixels,  the computer would see 160,000 
+                  number values.</p>
                 <h3>Color</h3>
-                  <p>Color can be used to help predict what is an image, but if you are not using color as a feature 
-                  (see next section), then you are adding a huge computation overhead for no reason.</p>
+                <p>When the image has color, you are adding 3 additional dimentions. The image will now have three number values for
+                  each pixel. One for red, one for green and one for blue also known as RGB. The combination of these values make up your color spectrum (fig.2).
+                  The computer will now see the image as (400x400)x3 = 480,000.
+                <header style="margin-bottom:1em;padding-bottom:0.5em; margin-top:0; padding-top:0;" class="style1">
+                  <table>
+                  <tr>
+                    <td>
+                      <img src="images/image_array.png" alt="" />
+                    </td>
+                    <td>
+                      <img src="images/rgb.gif" alt="" />
+                    </td>
+                    <tr>
+                    <td>fig1</td>
+                    <td>fig2</td>
+                  </tr>
+                  </table>
+                </header>
+                <h3>Size</h3>
+                  <p>Important when deciding what level of detail you want to extract from the image, and is usually one of the 
+                   biggest contributing factors on performance.</p>
                 <h3>Angle, Rotation, Scale</h3>
                   Because computers do not interpret images the same way humans do, they do not automatically 
                   understand and diffrentiate changes in things like angle scale and rotation.
