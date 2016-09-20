@@ -41,17 +41,18 @@
             install and maintain, and complicated to configure.</strong> For this reason, most factories in China still use<strong> spreadsheets.</strong></p>
           <br>
           <p class="style3">In this project I want to create <strong>cost effective and very easy to deploy and maintain</strong> software to track production line metrics
-          for the vast amount of supiers and sub suppliers needed to successfully build a product. The aim is not be 100% accurate but rather to give people complete  
+          for the vast amount of suppliers and sub suppliers needed to successfully build a product. The aim is not be 100% accurate but rather to give people complete  
           visibility into their manufacturing in China. <strong>Think Fitbit for manufacturing.</strong>
           </p>
           <br> 
           <p class="style3">This project will demonstrate how we use data from images to build a model and predict products on a production line.</p>
           <br>
           <p class="style1">The goal is to have the ability to quickly train a new product and predict it with at least a 90% accuracy.</p>
-          <br> INSERT VIDEO HERE!
-          <!--<ul class="actions">-->
-          <!--<li><a href="#" class="button style3 big">Proceed</a></li>-->
-          <!--</ul>-->
+          <br>
+          <iframe width="520" height="315"
+            src="https://www.youtube.com/embed/SFc2fO-x3QM"
+            allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen">
+          </iframe>
         </section>
       </div>
 
@@ -73,11 +74,11 @@
             <header style="margin-bottom:1em;padding-bottom:0.5em;" class="style1">
               <p style="margin:0em; margin-bottom:2em; line-height:0em;">Important considerations when working with images</p>
             </header>
-            <h3>Computers dont see images like humans do</h3>
+            <h3>Computers don't see images like humans do</h3>
             <p>Computers see images with number representations for each pixel (see figl below) If an image has 6x9 pixels (height x width), the computer would see 6x9 = 54 
             number values.</p>
             <h3>Color</h3>
-            <p>When an image has color, you are adding 3 additional dimentions. The image will now have three number values for
+            <p>When an image has color, you are adding 3 additional dimensions. The image will now have three number values for
             each pixel. One for red, one for green and one for blue (RGB). The combination of these values make up your color spectrum (fig2).
             The computer will see the colored image as (6x9)x3 = 162.
             <header style="margin-bottom:1em;padding-bottom:0.5em; margin-top:0; padding-top:0;" class="style1">
@@ -99,11 +100,20 @@
             <p>Important when deciding what level of detail you want to extract from the image, and is usually one of the 
             biggest contributing factors on performance.</p>
             <h3>Angle, Rotation, Scale</h3>
+            <p>
             Because computers do not interpret images the same way humans do, they do not automatically understand differences 
-            in angle scale and rotation e.g., if you were to look at an person from the front or side, you inherantly know its the same person, 
+            in angle scale and rotation e.g., if you were to look at an person from the front or side, you inherently know its the same person, 
             a computer however will not know the difference unless you specifically program it to.
+            </p>
             <h3>Image Segmentation</h3>
-            <h3>Image Dataset</h3>
+            <p>
+            This is an area in Computer Vision where you remove an object from the background with a mask.
+            For this project we implemented image segmentation to be able to still predict objects when there is noise but we do not
+            have allot of test data.
+            </p>
+            <center>
+              <img style="" src="images/segmentation.png" alt="" />
+            </center>
           </section>
         </div>
       </div>
@@ -115,12 +125,12 @@
           <header class="style1">
             <h2>Given two images, how can we determine their similarity?</h2>
             <p>Given two images, how can we determine their similarity? We can measure the pixel to pixel similarity by measuring their Euclidean distance, but that measure is very sensitive to noise, rotation, translation and illumination changes. In most applications we would like to be robust to such change.</p>
-            <p>To allow for rotation and scale invariance, we have selected the SURF algoritm to extract the image features. I will give a brief overview of how HOG algorithms works</p>
+            <p>To allow for rotation and scale invariance, we have selected the SURF algorithm to extract the image features. I will give a brief overview of how HOG algorithms works</p>
           </header>
           <h3>1. Detect keypoints</h3>
           <p>
           The most distinctive points on an image are its corners and edges. Think of a jigsaw puzzle. It is easier to together pieces with edges of buildings than pieces of blank sky.
-          Simalarly the algoritm will use edges an corners as interest points.The Laplacian of the Gaussian is used to detect keypoints. Log acts as a blob detector which 
+          Similarly the algorithm will use edges an corners as interest points.The Laplacian of the Gaussian is used to detect keypoints. Log acts as a blob detector which 
           can detect blobs in various sizes. An orientation is calculated for each key point. Any further calculations are done relative to this orientation. This effectively cancels out the effect of orientation, making it rotation invariant.
           </p>
           <div style="margin:0em;background-color:white;height:200px">
@@ -134,7 +144,7 @@
           <div style="clear:both;height:250px;background-color:white;">
             <img style="float:left;margin-bottom:20px;margin-right:20px;" height="250" width="550" src="images/gradients.jpg" alt="" />
             <h3>3. Compute gradients</h3>
-            <p style="margin-right:20px">The 16x16 pixels are divided into 4x4 squares and the pixel gradients are calculted. The shows the direction in which the pixels are getting darker.
+            <p style="margin-right:20px">The 16x16 pixels are divided into 4x4 squares and the pixel gradients are calculated. The shows the direction in which the pixels are getting darker.
             </p>
           </div>
 
@@ -154,9 +164,14 @@
             </p>
           </div>
           <div style="clear:both;">
-            <h3>We now have 128 byte vectors for each keypoints found on our image. To compare feature vectors for similarity you can calculate the Euclidean distance.
-              For our classification problem to detect which product is in an image, we will use a visual bag of words.<h3>
+          <h3>Rotation invariance</h3>
+            <p>This shows the algorithms ability to handle rotation</p>
+          <img width="600" style="" src="images/rotation.png" alt="" />
           </div>
+            </br>
+            </br>
+            <h3>We now have 128 byte vectors for each keypoints found on our image. You can use these descriptors to match keypoints, however we will be using them 
+              with a visual bag of words which we will explore further in the next section.<h3>
         </div>
       </div>
 
@@ -165,26 +180,26 @@
         <div class="title">Visual Bag Of Words</div>
         <div style="padding:0 6em 0 6em;" id="footer" class="container">
           <header class="style1">
-            <!--<h2>Ipsum sapien elementum portitor?</h2>-->
             <p>Bag of words models are a popular technique for image classification inspired by models used in natural language processing. The model ignores or downplays word arrangement (spatial information in the image) and classifies based on a histogram of the frequency of visual words.</p>
           </header>
-          <hr />
+          <br />
+          <br />
           <h3>Why have a vocabulary?</h3>
           <p>
-          Images dont have words so we will have to create our own vocabulary. Once we have a vocabulary that describes all the interest points in our images, we can 
+          Images don't have words so we will have to create our own vocabulary. Once we have a vocabulary that describes all the interest points in our images, we can 
           then check how many words each image contains. We can then use the amount of times the words appear to classify the image. If an image had the words eyes, mouth and nose for example, we would classify it as face.
           </p>
 
           <h3>1. Build a vocabulary of words</h3>
           <p>
-          By using the knn clustering algorithm on the feature descriptors of all of our images. We can group the descriptors into k 
+          By using the KNN clustering algorithm on the feature descriptors of all of our images. We can group the descriptors into k 
           mutually exclusive clusters. Each cluster center represents a feature, or visual word. All the words will make up the vocabulary.
           <center><img style="" src="images/visualwordsoverview.png" alt="" /></center>
           </p>
 
           <h3>2. Create Feature Histogram for Images</h3>
-          <p>To create the frequence histogram for each image that, we get the descriptors for all each of our images
-          and get get their nearest neighbors to the vocbulary we had created. The amount of times the words match the vocabulary will make up our frequency histogram.</p>
+          <p>To create the frequency histogram for each image that, we get the descriptors for all each of our images
+          and get get their nearest neighbors to the vocabulary we had created. The amount of times the words match the vocabulary will make up our frequency histogram.</p>
           <center><img style="" src="images/bagoffeatures.png" alt="" /></center>
 
           <h3>Example</h3>
@@ -208,17 +223,19 @@
         <section id="features">
           <header class="style1">
             <h2>Using the feature histograms from our BOW's we will now train a few models and evaluate their performance.</h2>
-            <p>Add thumbnails here?!!?</p>
+            <p>
+          <img height="100" style="" src="images/collage_long.png" alt="" />
+          </p>
           </header>
           <h3>Train and Test Data</h3>
           <p>
-          We have 10 different classes in total to classify. You can see them TODO!!! here.
+          We have 10 different classes in total to classify.  
           For each class we have created roughly 100 images with a total of 1056 images.
           When evaluating the model<strong> we use a test train split of 20% and 80% respectively.</strong>
           </p>
-          <h3>Peformance with little data</h3>
+          <h3>Performance with little data</h3>
           <p>SVM and Logistic Regression performed particularly well with very little training data. With a model trained with only two images per class, they 
-					get roughly 60% preciasion and recall however the results can vary significantly when re-training which can be espected because of the small training set.</p>
+					get roughly 60% precision and recall however the results can vary significantly when re-training which can be expected because of the small training set.</p>
 						<table class="default">
 							<thead>
 								<tr>
@@ -276,7 +293,7 @@
 						</table>
 
           <h3>Classify 5 Classes</h3>
-					<p>With 5 classes with a hundered training images each, the model performs very well at around 97% precision and recall.</p>
+					<p>With 5 classes with a hundred training images each, the model performs very well at around 97% precision and recall.</p>
 						<table class="default">
 							<thead>
 								<tr>
@@ -324,7 +341,7 @@
 									<td>103</td>
 								</tr>
 								<tr>
-									<td>K Nearest Neigbors</td>
+									<td>K Nearest Neighbors</td>
 									<td>0.85</td>
 									<td>0.70</td>
 									<td>0.70</td>
@@ -333,9 +350,9 @@
 							</tbody>
 						</table>
 
-          <h3>Classify 10 Clasess</h3>
-          <p>Classifying 10 different product double what we did last, the result is excelent with an increase in performance. The 10 class image set was taken at a higher reslotuion, however the images have been resized to the same size as the 5 class image set.
-          The diffent images may account for the slight increase in performance.</p>
+          <h3>Classify 10 Classes</h3>
+          <p>Classifying 10 different product double what we did last, the result is excellent with an increase in performance. The 10 class image set was taken at a higher resolution, however the images have been re-sized to the same size as the 5 class image set.
+          The different images may account for the slight increase in performance.</p>
           <table class="default">
 							<thead>
 								<tr>
@@ -383,7 +400,7 @@
 									<td>212</td>
 								</tr>
 								<tr>
-									<td>K Nearest Neigbors</td>
+									<td>K Nearest Neighbors</td>
 									<td>0.97</td>
 									<td>0.96</td>
 									<td>0.96</td>
@@ -393,89 +410,97 @@
 						</table>
 
           <h3>Image Size on Performance</h3>
-          <p>Here we wanted to look at what impact image size would have on the models performance. With every increase of about 100px width (width and hight changed proportionally), the performance went up roughly 2%
+          <p>Here we wanted to look at what impact image size would have on the models performance. With every increase of about 100px width (width and height changed proportionally), the performance went up roughly 2%
           </br> 
           click to zoom </br>
 					<a href="images/image_scores.png" data-lightbox="image-1" data-title="Image Size Scores"><img width="100" style="" src="images/image_scores.png" alt="" /></a>
           </p>
-          <h3>BOW Size / Feature importance</h3>
+          <h3>BOW Size</h3>
+          <center><img style="" src="images/feature_importance.png" alt="" /></center>
           <p>
-          BOW size will impact how many words KNN clusters which will be the size of you feature dimention. The more words you have, the more detail can be extracted from each image.
+          BOW size will impact how many words KNN clusters which will be the size of you feature dimension. The more words you have, the more detail can be extracted from each image.
           To decide the ideal size for the BOW we looked at feature importances from the Random Forest model. This is show as "gini importance" or "mean decrease impurity" and is defined as the total decrease in node impurity as percentage ranked by importance
 
            </br> 
           click to zoom </br>
 					<a href="images/bow_scores.png" data-lightbox="image-1" data-title="BOW Scores"><img width="100" style="" src="images/bow_scores.png" alt="" /></a>
           </p>
-          <center><img style="" src="images/feature_importance.png" alt="" /></center>
+
+          <h3>Noise</h3>
+          <p>
+          All the training images were trained on clear backgrounds, this is similar to the actual manufacturing environment. For this problem we also want to be able to quickly 
+          classify new products as they are added to the manufacturing line. This would mean you would start with a small training set and build up to a larger set that will be 
+          able to handle noise more effectively. In the video, you will see we have added some noise to the image. The classification performs as expected and miss-classifies the product.
+          Using image Segmentation to reduce the noise, we overcome the problem.
+          </p>
+
+          <center>
+            <iframe width="420" height="315"
+              src="https://www.youtube.com/embed/nS-eiTUkc7Y"
+              allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"
+              >
+            </iframe>
+          </center>
 
           <h3>Summary</h3>
-					<a href="images/collage_prod2.jpg" data-lightbox="image-1" data-title="My caption">Image #1</a>
+          SVM was our best performing classifier. 
+          We found that creating the BOW, and training the model was computationally heavy and for the thousand images could take a few minutes. For the manufacturing use case, 
+          this can potentially pose a problem as we want to be continually training our model as we get new images. Having the BOW at 600 words, and the image size at 300px gives a good
+          balance of training speed and prediction accuracy.
+          I performed a grid search on various C and intercept parameters with no improvements.
+
         </section>
       </div>
     </div>
 
-    <!-- Features -->
+    <!-- Conclusion -->
     <div class="wrapper style3">
-      <div class="title">The Features</div>
+      <div class="title">Finally</div>
       <div style="padding:0 6em 0 6em;" id="highlights" class="container">
         <header class="style1">
-          <h2>A feature is a distinctive attribute or aspect of something</h2>
-          <p>Given two images, how can we determine their similarity? We can measure the pixel to pixel similarity by measuring their Euclidean distance, but that measure is very sensitive to noise, rotation, translation and illumination changes. In most applications we would like to be robust to such change.</p>
-          <p>To allow for rotation and scale invariance, we have selected the SURF algoritm to extract the image features. I will give a brief overview of how HOG algorithms works</p>
+          <h2>Conclusion</h2>
+          <p>Overall, the SURF descriptors, visual bag of words and image segmentation provide a great combination for predicting products with a limited amount of training data.
+          For the 10 products, we tested the accuracy was exceptional. I believe this to be a viable solution for manufacturing production line tracking.</p>
         </header>
-        <h3>1. Detect keypoints</h3>
-        <p>
-        The most distinctive points on an image are its corners and edges. Think of a jigsaw puzzle. It is easier to together pieces with edges of buildings than pieces of blank sky.
-        Simalarly the algoritm will use edges an corners as interest points.The Laplacian of the Gaussian is used to detect keypoints. Log acts as a blob detector which 
-        can detect blobs in various sizes. An orientation is calculated for each key point. Any further calculations are done relative to this orientation. This effectively cancels out the effect of orientation, making it rotation invariant.
-        </p>
-        <div style="margin:0em;background-color:white;height:200px">
-          <img style="float:left;margin-bottom:20px;margin-right:20px;" height="200" width="550" src="images/16x16.jpg" alt="" />
-          <h3>2. Build image descriptors around keypoints</h3>
-          <p style="margin-right:100px;">
-          A 16x16 pixel area or descriptor is built around the center of each interest point.
-          </p>
-        </div>
+        <header class="style1">
+          <h2>Next Steps</h2>
+          <p>Add the ability to predict that a newly introduced product does not belong to any of the classes. We can do this by adding a negative training set. Ten classes are not enough for the products intended purpose, so adding another 20 classes.
+          Finally getting actual manufacturing backgrounds and ascertaining how the model performs with the noise, and how many images per class will be needed for the model to perform well.</p>
+        </header>
       </div>
     </div>
 
     <!-- Footer -->
     <div id="footer-wrapper" class="wrapper">
-      <div class="title">The Rest Of It</div>
+      <div class="title">the rest of it</div>
       <div id="footer" class="container">
         <header class="style1">
-          <h2>Ipsum sapien elementum portitor?</h2>
-          <p>
-          Sed turpis tortor, tincidunt sed ornare in metus porttitor mollis nunc in aliquet.<br />
-          Nam pharetra laoreet imperdiet volutpat etiam consequat feugiat.
-          </p>
         </header>
         <hr />
         <div class="row 150%">
           <div class="6u 12u(mobile)">
 
-            <!-- Contact Form -->
+            <!-- contact form -->
             <section>
               <form method="post" action="#">
                 <div class="row 50%">
                   <div class="6u 12u(mobile)">
-                    <input type="text" name="name" id="contact-name" placeholder="Name" />
+                    <input type="text" name="name" id="contact-name" placeholder="name" />
                   </div>
                   <div class="6u 12u(mobile)">
-                    <input type="text" name="email" id="contact-email" placeholder="Email" />
+                    <input type="text" name="email" id="contact-email" placeholder="email" />
                   </div>
                 </div>
                 <div class="row 50%">
                   <div class="12u">
-                    <textarea name="message" id="contact-message" placeholder="Message" rows="4"></textarea>
+                    <textarea name="message" id="contact-message" placeholder="message" rows="4"></textarea>
                   </div>
                 </div>
                 <div class="row">
                   <div class="12u">
                     <ul class="actions">
-                      <li><input type="submit" class="style1" value="Send" /></li>
-                      <li><input type="reset" class="style2" value="Reset" /></li>
+                      <li><input type="submit" class="style1" value="send" /></li>
+                      <li><input type="reset" class="style2" value="reset" /></li>
                     </ul>
                   </div>
                 </div>
@@ -485,22 +510,22 @@
           </div>
           <div class="6u 12u(mobile)">
 
-            <!-- Contact -->
+            <!-- contact -->
             <section class="feature-list small">
               <div class="row">
                 <div class="6u 12u(mobile)">
                   <section>
-                    <h3 class="icon fa-home">Mailing Address</h3>
+                    <h3 class="icon fa-home">mailing address</h3>
                     <p>
-                    Untitled Corporation<br />
-                    1234 Somewhere Rd #987<br />
-                    Nashville, TN 00000-0000
+                    untitled corporation<br />
+                    1234 somewhere rd #987<br />
+                    nashville, tn 00000-0000
                     </p>
                   </section>
                 </div>
                 <div class="6u 12u(mobile)">
                   <section>
-                    <h3 class="icon fa-comment">Social</h3>
+                    <h3 class="icon fa-comment">social</h3>
                     <p>
                     <a href="#">@untitled-corp</a><br />
                     <a href="#">linkedin.com/untitled</a><br />
@@ -512,7 +537,7 @@
               <div class="row">
                 <div class="6u 12u(mobile)">
                   <section>
-                    <h3 class="icon fa-envelope">Email</h3>
+                    <h3 class="icon fa-envelope">email</h3>
                     <p>
                     <a href="#">info@untitled.tld</a>
                     </p>
@@ -520,7 +545,7 @@
                 </div>
                 <div class="6u 12u(mobile)">
                   <section>
-                    <h3 class="icon fa-phone">Phone</h3>
+                    <h3 class="icon fa-phone">phone</h3>
                     <p>
                     (000) 555-0000
                     </p>
@@ -535,7 +560,7 @@
       </div>
       <div id="copyright">
         <ul>
-          <li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+          <li>&copy; untitled</li><li>design: <a href="http://html5up.net">html5 up</a></li>
         </ul>
       </div>
     </div>
