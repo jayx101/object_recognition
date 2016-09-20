@@ -216,7 +216,6 @@
           For each class we have created roughly 100 images with a total of 1056 images.
           When evaluating the model<strong> we use a test train split of 20% and 80% respectively.</strong>
           </p>
-          <h3>Pipeline</h3>
           <h3>Peformance with little data</h3>
           <p>SVM and Logistic Regression performed particularly well with very little training data. With a model trained with only two images per class, they 
 					get roughly 60% preciasion and recall however the results can vary significantly when re-training which can be espected because of the small training set.</p>
@@ -394,9 +393,21 @@
 						</table>
 
           <h3>Image Size on Performance</h3>
-          <p>Here we wanted to look at what impact image size would have on the models performance. With every increase of about 100px width (width and hight changed proportionally), the performance went up roughly 2%</p>
-          
+          <p>Here we wanted to look at what impact image size would have on the models performance. With every increase of about 100px width (width and hight changed proportionally), the performance went up roughly 2%
+          </br> 
+          click to zoom </br>
+					<a href="images/image_scores.png" data-lightbox="image-1" data-title="Image Size Scores"><img width="100" style="" src="images/image_scores.png" alt="" /></a>
+          </p>
           <h3>BOW Size / Feature importance</h3>
+          <p>
+          BOW size will impact how many words KNN clusters which will be the size of you feature dimention. The more words you have, the more detail can be extracted from each image.
+          To decide the ideal size for the BOW we looked at feature importances from the Random Forest model. This is show as "gini importance" or "mean decrease impurity" and is defined as the total decrease in node impurity as percentage ranked by importance
+
+           </br> 
+          click to zoom </br>
+					<a href="images/bow_scores.png" data-lightbox="image-1" data-title="BOW Scores"><img width="100" style="" src="images/bow_scores.png" alt="" /></a>
+          </p>
+          <center><img style="" src="images/feature_importance.png" alt="" /></center>
 
           <h3>Summary</h3>
 					<a href="images/collage_prod2.jpg" data-lightbox="image-1" data-title="My caption">Image #1</a>
