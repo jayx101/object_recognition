@@ -85,10 +85,10 @@
               <table>
                 <tr>
                   <td>
-                    <img src="images/image_array.png" alt="" />
+                    <img class="image fit" style="max-width:400px" src="images/image_array.png" alt="" />
                   </td>
                   <td>
-                    <img src="images/rgb.gif" alt="" />
+                    <img class="image fit" style="max-width:400px" src="images/rgb.gif" alt="" />
                   </td>
                   <tr>
                     <td>fig1</td>
@@ -112,7 +112,7 @@
             have allot of test data.
             </p>
             <center>
-              <img style="" src="images/segmentation.png" alt="" />
+              <img class="image fit" style="max-width:600px;" src="images/segmentation.png" alt="" />
             </center>
           </section>
         </div>
@@ -121,7 +121,8 @@
       <!-- Features -->
       <div class="wrapper style3">
         <div class="title">Image Descriptors</div>
-        <div style="padding:0 6em 0 6em;" id="highlights" class="container">
+        <div id="main" class="container">
+        <section id="features">
           <header class="style1">
             <h2>Given two images, how can we determine their similarity?</h2>
             <p>Given two images, how can we determine their similarity? We can measure the pixel to pixel similarity by measuring their Euclidean distance, but that measure is very sensitive to noise, rotation, translation and illumination changes. In most applications we would like to be robust to such change.</p>
@@ -133,52 +134,78 @@
           Similarly the algorithm will use edges an corners as interest points.The Laplacian of the Gaussian is used to detect keypoints. Log acts as a blob detector which 
           can detect blobs in various sizes. An orientation is calculated for each key point. Any further calculations are done relative to this orientation. This effectively cancels out the effect of orientation, making it rotation invariant.
           </p>
-          <div style="margin:0em;background-color:white;height:200px">
-            <img style="float:left;margin-bottom:20px;margin-right:20px;" height="200" width="550" src="images/16x16.jpg" alt="" />
-            <h3>2. Build image descriptors around keypoints</h3>
-            <p style="margin-right:100px;">
-            A 16x16 pixel area or descriptor is built around the center of each interest point.
-            </p>
+
+          <div class="jrow">
+            <div class="jcontainer">
+              <img class="jleft" src="images/16x16.jpg" width="50%" />
+              <h3>2. Build image descriptors around keypoints</h3>
+              <p>
+              A 16x16 pixel area or descriptor is built around the center of each interest point.
+              </p>
+                <div style="clear: both"></div>      
+            </div>
           </div>
 
-          <div style="clear:both;height:250px;background-color:white;">
-            <img style="float:left;margin-bottom:20px;margin-right:20px;" height="250" width="550" src="images/gradients.jpg" alt="" />
+          </br>
+
+          <div class="jrow">
+            <div class="jcontainer">
+            <img class="jleft" src="images/gradients.jpg" width="50%" />
+
             <h3>3. Compute gradients</h3>
-            <p style="margin-right:20px">The 16x16 pixels are divided into 4x4 squares and the pixel gradients are calculated. The shows the direction in which the pixels are getting darker.
+            <p>The 16x16 pixels are divided into 4x4 squares and the pixel gradients are calculated. The shows the direction in which the pixels are getting darker.
             </p>
+                <div style="clear: both"></div>      
+            </div>
           </div>
 
-          <div style="clear:both;height:250px;background-color:white;">
-            <img style="float:left;margin-bottom:20px;margin-right:20px;" height="250" width="550" src="images/hog.jpg" alt="" />
+          </br>
+
+          <div class="jrow">
+            <div class="jcontainer">
+            <img class="jleft" src="images/hog.jpg" width="50%" height="156" />
             <h3>4. Compute gradient direction histogram</h3>
-            <p style="margin-right:20px">
+            <p>
             For each square, compute gradient direction histogram over the 8 directions
             </p>
-            <br>
+            <div style="clear: both"></div>      
+            </div>
           </div>
-          <div style="clear:both;height:100px;background-color:white;">
-            <img style="float:left;margin-bottom:20px;margin-right:20px;" height="100" width="550" src="images/128hist.jpg" alt="" />
-            <h3>5. Concatenate histograms</h3>
-            <p>
-            Concatenate the histograms to obtain a 128 (16*8) dimensional feature vector
-            </p>
+
+          </br>
+
+          <div class="jrow">
+            <div class="jcontainer">
+              <img class="jleft" src="images/128hist.jpg" width="50%" />
+
+              <h3>5. Concatenate histograms</h3>
+              <p>Concatenate the histograms to obtain a 128 (16*8) dimensional feature vector</p>
+              <div style="clear: both"></div>      
+
+            </div>
           </div>
-          <div style="clear:both;">
+
+          </br>
+
           <h3>Rotation invariance</h3>
             <p>This shows the algorithms ability to handle rotation</p>
-          <img width="600" style="" src="images/rotation.png" alt="" />
-          </div>
+            <center>
+          <img class="image fit" style="max-width:800px" src="images/rotation.png" alt="" />
+            </center> 
             </br>
             </br>
             <h3>We now have 128 byte vectors for each keypoints found on our image. You can use these descriptors to match keypoints, however we will be using them 
               with a visual bag of words which we will explore further in the next section.<h3>
+        </section>
         </div>
       </div>
 
       <!-- BOW -->
       <div id="footer-wrapper" class="wrapper">
         <div class="title">Visual Bag Of Words</div>
-        <div style="padding:0 6em 0 6em;" id="footer" class="container">
+        <div id="footer" class="container">
+        <section id="features">
+
           <header class="style1">
             <p>Bag of words models are a popular technique for image classification inspired by models used in natural language processing. The model ignores or downplays word arrangement (spatial information in the image) and classifies based on a histogram of the frequency of visual words.</p>
           </header>
@@ -194,23 +221,26 @@
           <p>
           By using the KNN clustering algorithm on the feature descriptors of all of our images. We can group the descriptors into k 
           mutually exclusive clusters. Each cluster center represents a feature, or visual word. All the words will make up the vocabulary.
-          <center><img style="" src="images/visualwordsoverview.png" alt="" /></center>
+          <center><img class="image fit" style="max-width:576px;" src="images/visualwordsoverview.png" alt="" /></center>
           </p>
 
           <h3>2. Create Feature Histogram for Images</h3>
           <p>To create the frequency histogram for each image that, we get the descriptors for all each of our images
           and get get their nearest neighbors to the vocabulary we had created. The amount of times the words match the vocabulary will make up our frequency histogram.</p>
-          <center><img style="" src="images/bagoffeatures.png" alt="" /></center>
+          <center><img class="image fit" style="max-width:612px;" src="images/bagoffeatures.png" alt="" /></center>
+
+          </br>
 
           <h3>Example</h3>
           <p>
           Images show a basic example of visual BOW. The first image shows our image set. The second image shows what the bag of words might look like 
           after we have clustered the descriptors. The final image shows what a frequency histogram representation of each image might look like.
-          <center><img style="" src="images/bow1.png" alt="" /></center>
-          <center><img style="" src="images/bow2.png" alt="" /></center>
-          <center><img style="" src="images/bow3.png" alt="" /></center>
+          <center><img class="image fit" style="max-width:770px;" src="images/bow1.png" alt="" /></center>
+          <center><img class="image fit" style="max-width:770px;" src="images/bow2.png" alt="" /></center>
+          <center><img class="image fit" style="max-width:770px;" src="images/bow3.png" alt="" /></center>
           </p>
         </div>
+        </section>
       </div>
     </div>
 
@@ -224,7 +254,9 @@
           <header class="style1">
             <h2>Using the feature histograms from our BOW's we will now train a few models and evaluate their performance.</h2>
             <p>
-          <img height="100" style="" src="images/collage_long.png" alt="" />
+            <center>
+          <img class="image fit" style="max-width:648px" src="images/collage_long.png" alt="" />
+          </center>
           </p>
           </header>
           <h3>Train and Test Data</h3>
@@ -403,12 +435,11 @@
 									<td>K Nearest Neighbors</td>
 									<td>0.97</td>
 									<td>0.96</td>
-									<td>0.96</td>
-									<td>212</td>
 								</tr>
+
 							</tbody>
 						</table>
-
+            
           <h3>Image Size on Performance</h3>
           <p>Here we wanted to look at what impact image size would have on the models performance. With every increase of about 100px width (width and height changed proportionally), the performance went up roughly 2%
           </br> 
@@ -416,7 +447,7 @@
 					<a href="images/image_scores.png" data-lightbox="image-1" data-title="Image Size Scores"><img width="100" style="" src="images/image_scores.png" alt="" /></a>
           </p>
           <h3>BOW Size</h3>
-          <center><img style="" src="images/feature_importance.png" alt="" /></center>
+          <center><img class="image fit" style="" src="images/feature_importance.png" alt="" /></center>
           <p>
           BOW size will impact how many words KNN clusters which will be the size of you feature dimension. The more words you have, the more detail can be extracted from each image.
           To decide the ideal size for the BOW we looked at feature importances from the Random Forest model. This is show as "gini importance" or "mean decrease impurity" and is defined as the total decrease in node impurity as percentage ranked by importance
@@ -437,6 +468,7 @@
           <center>
             <iframe width="420" height="315"
               src="https://www.youtube.com/embed/nS-eiTUkc7Y"
+              </
               allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"
               >
             </iframe>
