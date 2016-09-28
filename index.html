@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
     <link href="dist/css//lightbox.css" rel="stylesheet">
+    <script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
   </head>
   <body class="homepage">
     <div id="page-wrapper">
@@ -49,10 +54,14 @@
           <br>
           <p class="style1">The goal is to have the ability to quickly train a new product and predict it with at least a 90% accuracy.</p>
           <br>
-          <iframe width="520" height="315"
+          <div style="width:70%;height:100%;margin:0 auto;background:#CCC">
+          <div class='myIframe'> 
+          <iframe
             src="https://www.youtube.com/embed/SFc2fO-x3QM"
-            allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen">
+            allowfullscren="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen">
           </iframe>
+          </div>
+          </div>
         </section>
       </div>
 
@@ -439,7 +448,7 @@
 
 							</tbody>
 						</table>
-            
+
           <h3>Image Size on Performance</h3>
           <p>Here we wanted to look at what impact image size would have on the models performance. With every increase of about 100px width (width and height changed proportionally), the performance went up roughly 2%
           </br> 
@@ -466,12 +475,16 @@
           </p>
 
           <center>
-            <iframe width="420" height="315"
+          <div style="width:70%;height:100%;margin:0 auto;background:#CCC">
+          <div class='myIframe'> 
+            <iframe
               src="https://www.youtube.com/embed/nS-eiTUkc7Y"
               </
               allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"
               >
             </iframe>
+            </div>
+            </div>
           </center>
 
           <h3>Summary</h3>
